@@ -1,0 +1,23 @@
+
+class Solution(object):
+    def smallestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        count=Counter(s)
+        mid=''
+        left=[]
+        
+        odd_chars=[c for c in count if count[c]%2!=0]
+        if len(odd_chars)>1:
+            return ""
+        for char in sorted(count):
+            freq=count[char]
+            if freq%2!=0:
+                mid=char
+            left.append(char*(freq//2))
+            
+        left_half=''.join(left)
+        return left_half+mid+left_half[::-1]
+        
