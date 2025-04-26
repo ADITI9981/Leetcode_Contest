@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> baseUnitConversions(vector<vector<int>>& conversions) {
+        int n = conversions.size()+1;
+        vector<int> result(n,0);
+        vector<vector<pair<int,int>>> graph(n);
+        const int MOD = 1000000007;
+        
+        for(auto&conv : conversions){
+            int u = conv[0], v=conv[1], factor=conv[2];
+            graph[u].push_back({v, factor});
+        }
+        result[0]=1;
+        dfs(0,graph,result,MOD);
+        
+        return result;
+    }
+private:
+    void dfs(int u,vector<vector<pair<int,int>>>&graph,vector<int>&result, int MOD){
+        for(auto&[v,factor]: graph[u]){
+            result[v]=(1ll*result[u]*factor)%MOD;
+            dfs(v,graph,result,MOD);
+        }
+    }
+};
