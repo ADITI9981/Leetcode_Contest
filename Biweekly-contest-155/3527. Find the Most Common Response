@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string findCommonResponse(vector<vector<string>>& responses) {
+        unordered_map<string, int> count;
+        for(auto& day: responses){
+            set<string> unique(day.begin(), day.end());
+            for(const string& responses : unique){
+                count[responses]++;
+            }
+        }
+
+            int maxfreq =0;
+            for(auto& [word,freq]:count){
+                maxfreq = max(maxfreq,freq);
+            }
+            string result="";
+            for( auto& [word,freq]: count){
+                if(freq == maxfreq){
+                    if(result == ""|| word<result){
+                        result = word;                
+                    }
+                }
+            }
+        return result;
+    }
+};
