@@ -15,4 +15,4 @@ Here’s a quick look at my performance in recent contests:
              | #Biweekly_contest_154   |     #13078/27096     |
              | #Weekly_Contest_445     |     #6465/26585      |
              | #Weekly_Contest_446     |     #5459/25906      |
-             | #Biweekly_contest_154   |     #3358/24571      |
+             | #Biweekly_contest_155   |     #3358/24571      |
