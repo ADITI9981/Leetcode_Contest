@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string toBase(int n, int base){
+        string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string result ="";
+        if(n==0) return "0";
+        while(n>0){
+            result = chars[n%base] +result;
+            n/=base;
+        }
+        return result;
+    }
+public:
+    string concatHex36(int n) {
+        int square = n*n;
+        int cube = n*n*n;
+        string hex = toBase(square,16);
+        string base36 = toBase(cube,36);
+        return hex + base36;
+    }
+};©leetcode
