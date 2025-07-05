@@ -1,0 +1,44 @@
+class Solution {
+public:
+    long long minCost(int m, int n, vector<vector<int>>& waitCost) {
+        priority_queue<tuple<long long,int,int,int>,
+        vector<tuple<long long,int,int,int>>,
+            greater<>> pq;
+
+        vector<vector<vector<long long>>> dist(m,vector<vector<long long>>(n,vector<long long>(2,LLONG_MAX)));
+        pq.push({(1) *(1),0,0,1});
+        dist[0][0][1%2] = (1)*(1);
+        int dirs[2][2] = {{1,0},{0,1}};
+
+        while(!pq.empty()){
+            auto [cost, i,j,time] = pq.top(); pq.pop();
+
+            if(i == m-1 && j==n-1)
+                return cost;
+            int parity = time%2;
+            if(dist[i][j][parity]<cost) continue;
+
+            if(parity == 1){
+                for(auto& dir :dirs){
+                    int ni = i+dir[0];
+                    int nj = j+ dir[1];
+                    if(ni <m && nj<n){
+                        long long newcost = cost +(ni +1)*(nj+1);
+                        if(newcost < dist[ni][nj][(time+1)%2]){
+                            dist[ni][nj][(time+1)%2]= newcost;
+                            pq.push({newcost,ni,nj,time+1});
+                            
+                        }
+                    }
+                }
+            }else{
+                long long newcost = cost + waitCost[i][j];
+                if(newcost<dist[i][j][(time+1)%2]){
+                    dist[i][j][(time +1)%2]=newcost;
+                    pq.push({newcost,i,j,time+1});
+                }
+            }
+        }
+        return -1;
+    }
+};©leetcode
