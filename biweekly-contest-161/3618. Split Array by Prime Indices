@@ -1,1 +1,24 @@
-
+class Solution {
+public:
+    bool isprime(int n){
+        if(n<2) return false;
+        for(int i=2;i<=sqrt(n);i++){
+            if(n%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    long long splitArray(vector<int>& nums) {
+        long long suma=0,sumb=0;
+        for(int i=0;i<nums.size();i++){
+            if(isprime(i)){
+                suma+=nums[i];
+            }
+            else{
+                sumb+=nums[i];
+            }
+        }
+        return abs(suma-sumb);
+    }
+};
