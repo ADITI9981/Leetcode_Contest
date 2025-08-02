@@ -1,1 +1,19 @@
-
+class Solution {
+public:
+    int minRemoval(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        int minitem = 0;
+        int count=nums.size();
+        int maxitem =0;
+        int n=nums.size();
+        while(maxitem<n)
+        if((long long)nums[maxitem]<=(long long)nums[minitem]*k){
+            count=min(count,n-(maxitem-minitem+1));
+            maxitem++;
+        }
+        else{
+            minitem++;
+        }
+        return count;
+    }
+};©leetcode
