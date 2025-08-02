@@ -1,1 +1,21 @@
+class Solution {
+public:
+    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
+        long long minFinish = INT_MAX;
 
+        for(int i=0;i<landStartTime.size();++i){
+            for(int j=0;j<waterStartTime.size();++j){
+                long long landEnd = (long long)landStartTime[i] + landDuration[i];
+                long long waterStart = max((long long)waterStartTime[j],landEnd);
+                long long finish1 = waterStart + waterDuration[j];
+                minFinish = min(minFinish,finish1);
+
+                long long waterEnd = (long long)waterStartTime[j]+ waterDuration[j];
+                long long landStart = max((long long)landStartTime[i] ,waterEnd);
+                long long finish2 = landStart + landDuration[i];
+                minFinish = min({minFinish ,finish1, finish2});
+            }
+        }
+        return (int)minFinish;
+    }
+};©leetcode
